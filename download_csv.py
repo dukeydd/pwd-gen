@@ -16,7 +16,17 @@ def get_dict(filename='usa.txt'):
         for word in dictionary:
             data.append(word.strip('\n').title())
     
-    print(data[:5])
     return data
 
-get_dict()
+
+def get_words(minimum_len=4, maximum_len=8):
+    data = get_dict()
+    words = [word for word in data 
+                if len(word) >= minimum_len 
+                and len(word) <= maximum_len]
+
+    return words
+
+if __name__ == "__main__":
+    words = get_words()
+    print(words)
