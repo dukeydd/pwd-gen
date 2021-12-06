@@ -1,2 +1,3 @@
 dictionary.txt
 venv
+*__pycache__*
