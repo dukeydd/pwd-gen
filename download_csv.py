@@ -1,9 +1,10 @@
 import requests
 from io import BytesIO
 import zipfile 
+import os
 
 
-def update_dict():
+def update_dictionary():
     url = "http://www.gwicks.net/textlists/usa.zip"
     resp = requests.get(url, stream=True).content
     zf = zipfile.ZipFile(BytesIO(resp))
@@ -11,6 +12,8 @@ def update_dict():
 
 
 def get_dict(filename='usa.txt'):
+    if not os.path.isfile(filename):
+        update_dictionary()
     data = []
     with open(filename, 'r') as dictionary:
         for word in dictionary:
