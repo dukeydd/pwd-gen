@@ -1,7 +1,7 @@
 import requests
 from io import BytesIO
 import zipfile 
-import os.path
+import os
 
 
 def update_dictionary():
@@ -9,9 +9,10 @@ def update_dictionary():
     resp = requests.get(url, stream=True).content
     zf = zipfile.ZipFile(BytesIO(resp))
     zf.extractall()
+    os.rename('usa.txt', 'dictionary.txt')
 
 
-def get_dict(filename='usa.txt'):
+def get_dict(filename='dictionary.txt'):
     if not os.path.isfile(filename):
         update_dictionary()
     data = []
