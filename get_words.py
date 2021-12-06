@@ -1,7 +1,7 @@
 import requests
 from io import BytesIO
 import zipfile 
-import os
+import os.path
 
 
 def update_dictionary():
@@ -36,9 +36,14 @@ def get_words(minimum_len=4, maximum_len=8):
         for idx, word in reversed(list(enumerate(words))):
             #  remove -s and -d and -es and -ed suffixed words
             if word[:-1] == words[idx-1] or word[:-2] == words[idx-1]:
-                words.pop(idx) 
-    return words
+                words.pop(idx)
 
+            # remove -ing words which do and do not end in 'e'
+            if word[:-3] == words[idx-1] or word[:-3] == words[idx-1][:-1]:
+                words.pop(idx)
+
+    words_needed = 16384 # 4^7
+    return words[:words_needed]
 
 
 if __name__ == "__main__":
