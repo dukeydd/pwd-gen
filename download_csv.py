@@ -28,12 +28,12 @@ def get_words(minimum_len=4, maximum_len=8):
                 and len(word) <= maximum_len]
 
     # attempt to remove plurals and past participles
-    for idx, word in reversed(list(enumerate(words))):
-        #  remove -s and -d and -es and -ed suffixed words
-        if word[:-1] == words[idx-1][:-1] or  word[:-2] == words[idx-1][:-2]:
-            # TODO: This doesn't work as it comparing Abated to Abat etc
-            words.pop(idx) 
-
+    # loop through to catch more due to having multiple versions of the same word
+    for _ in range(3):
+        for idx, word in reversed(list(enumerate(words))):
+            #  remove -s and -d and -es and -ed suffixed words
+            if word[:-1] == words[idx-1] or word[:-2] == words[idx-1]:
+                words.pop(idx) 
     return words
 
 
