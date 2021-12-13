@@ -1,6 +1,8 @@
 import uvicorn
 from fastapi import FastAPI
 import get_words 
+from random import randint
+
 
 app = FastAPI()
 
