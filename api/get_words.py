@@ -1,7 +1,7 @@
 import requests
 from io import BytesIO
 import zipfile 
-import os.path
+import os
 
 
 def update_dictionary():
@@ -9,9 +9,10 @@ def update_dictionary():
     resp = requests.get(url, stream=True).content
     zf = zipfile.ZipFile(BytesIO(resp))
     zf.extractall()
+    os.rename('usa.txt', 'dictionary.txt')
 
 
-def get_dict(filename='usa.txt'):
+def get_dict(filename='dictionary.txt'):
     if not os.path.isfile(filename):
         update_dictionary()
     data = []
@@ -44,6 +45,15 @@ def get_words(minimum_len=4, maximum_len=8):
 
     words_needed = 16384 # 4^7
     return words[:words_needed]
+
+
+def get_dice_dec(dice_value=0, dice_no=0):
+    if not dice_value and not dice_no:
+        raise ValueError("Either dice_value or dice_no not provided")
+    
+    dice_value -= 1 # arrays start at zero
+    decimal = dice_value/(4**dice_no)
+    return decimal
 
 
 if __name__ == "__main__":
