@@ -18,15 +18,6 @@ def get_all_words():
     }
 
 
-def get_dice_dec(dice_value=0, dice_no=0):
-    if not dice_value and not dice_no:
-        raise ValueError("Either dice_value or dice_no not provided")
-    
-    dice_value -= 1 # arrays start at zero
-    decimal = dice_value/(4**dice_no)
-    return decimal
-
-
 @app.get("/update_dict")
 def update_dict():
     get_words.update_dict()
@@ -41,6 +32,12 @@ def get_word(dice_values):
         raise ValueError("Incorrect number of dice values given")
     
     dice_values = [int(i) for i in list(dice_values)]
-    word_decimals = [get_dice_dec(dice_values[i], i+1) for i in range(len(dice_values))]
-    word_value = sum(word_decimals) * 4**7
-    return word_value      
+    print(dice_values)
+    if any(dice_values) > 4 or any(dice_values) < 1: # fix this
+        raise ValueError("Contains invalid values")
+
+
+    word_decimals = [get_words.get_dice_dec(dice_values[i], i+1) for i in range(len(dice_values))]
+    word_value = int(sum(word_decimals) * 4**7)
+    word = get_words.get_words()[word_value]
+    return word

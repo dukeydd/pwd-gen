@@ -47,6 +47,15 @@ def get_words(minimum_len=4, maximum_len=8):
     return words[:words_needed]
 
 
+def get_dice_dec(dice_value=0, dice_no=0):
+    if not dice_value and not dice_no:
+        raise ValueError("Either dice_value or dice_no not provided")
+    
+    dice_value -= 1 # arrays start at zero
+    decimal = dice_value/(4**dice_no)
+    return decimal
+
+
 if __name__ == "__main__":
     words = get_words()
     print(words[:20])
