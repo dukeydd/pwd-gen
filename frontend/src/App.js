@@ -23,18 +23,29 @@ function App() {
 
   useEffect(() => {
     for (const [key, value] of Object.entries(numbers)) {
-      console.log(key, value)
+      console.log(key)
       if ( typeof numbers[key] !== 'undefined' && numbers[key] ) {
         axios.get("http://0.0.0.0:8000/get_word/" + numbers[key].join(''))
-          .then((response) => console.log(response.data))
+          .then((response) => {
+
+            let newDict = words
+            newDict[key] = response.data;
+            setWords(newDict); 
+
+            // setWords({...words, [key]: response.data});
+            console.log(response.data);
+          })
           .catch(function (error) {
             console.log(error.toJSON());
           });
       }
     }
-    
-
   }, [numbers]);
+
+  useEffect(() => {
+    console.log(words)
+  }, [words]);
+  
   
   return (
     <div className="App">
