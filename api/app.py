@@ -29,7 +29,7 @@ def get_all_words():
 
 @app.get("/update_dict")
 def update_dict():
-    get_words.update_dict()
+    get_words.update_dictionary()
 
 
 @app.get("/get_word/{dice_values}")
