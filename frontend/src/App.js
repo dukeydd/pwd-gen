@@ -27,23 +27,17 @@ function App() {
       if ( typeof numbers[key] !== 'undefined' && numbers[key] ) {
         axios.get("http://0.0.0.0:8000/get_word/" + numbers[key].join(''))
           .then((response) => {
-
-            let newDict = words
-            newDict[key] = response.data;
-            setWords(newDict); 
-
-            // setWords({...words, [key]: response.data});
-            console.log(response.data);
+            setWords(words => ({...words, [key]: response.data}));
           })
-          .catch(function (error) {
-            console.log(error.toJSON());
+          .catch((error) => {
+            console.log(error);
           });
       }
     }
   }, [numbers]);
 
   useEffect(() => {
-    console.log(words)
+    console.log("words = ", words)
   }, [words]);
   
   
@@ -52,7 +46,7 @@ function App() {
       <h1> Password Generator </h1>
       <GridTiles numbers={numbers.one}/>
       <p />
-      Random Word One
+      {words.one}
       <p />
       <GridTiles numbers={numbers.two}/>
       <p />
