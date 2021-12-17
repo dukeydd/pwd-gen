@@ -22,12 +22,19 @@ function App() {
   }, [])
 
   useEffect(() => {
-    axios.get("http://0.0.0.0:8000/")
-        .then((response) => console.log(response.data))
-        .catch(function (error) {
-          console.log(error.toJSON());
-  });
-  }, []);
+    for (const [key, value] of Object.entries(numbers)) {
+      console.log(key, value)
+      if ( typeof numbers[key] !== 'undefined' && numbers[key] ) {
+        axios.get("http://0.0.0.0:8000/get_word/" + numbers[key].join(''))
+          .then((response) => console.log(response.data))
+          .catch(function (error) {
+            console.log(error.toJSON());
+          });
+      }
+    }
+    
+
+  }, [numbers]);
   
   return (
     <div className="App">
