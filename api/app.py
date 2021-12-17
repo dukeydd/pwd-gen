@@ -2,9 +2,18 @@ import uvicorn
 from fastapi import FastAPI, Query
 import get_words
 from random import randint
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def root():
@@ -41,3 +50,7 @@ def get_word(dice_values):
     word_value = int(sum(word_decimals) * 4**7)
     word = get_words.get_words()[word_value]
     return word
+
+
+if __name__ == "__main__":
+    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
