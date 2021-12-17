@@ -22,7 +22,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    for (const [key, value] of Object.entries(numbers)) {
+    for (const key of Object.keys(numbers)) {
       console.log(key)
       if ( typeof numbers[key] !== 'undefined' && numbers[key] ) {
         axios.get("http://0.0.0.0:8000/get_word/" + numbers[key].join(''))
@@ -50,11 +50,11 @@ function App() {
       <p />
       <GridTiles numbers={numbers.two}/>
       <p />
-      Random Word Two
+      {words.two}
       <p />
       <GridTiles numbers={numbers.three}/>
       <p />
-      Random Word Three
+      {words.three}
     </div>
   );
 }
