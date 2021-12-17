@@ -35,11 +35,6 @@ function App() {
       }
     }
   }, [numbers]);
-
-  useEffect(() => {
-    console.log("words = ", words)
-  }, [words]);
-  
   
   return (
     <div className="App">
