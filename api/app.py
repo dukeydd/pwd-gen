@@ -41,10 +41,9 @@ def get_word(dice_values):
         raise ValueError("Incorrect number of dice values given")
     
     dice_values = [int(i) for i in list(dice_values)]
-    print(dice_values)
+
     if any(dice_values) > 4 or any(dice_values) < 1: # fix this
         raise ValueError("Contains invalid values")
-
 
     word_decimals = [get_words.get_dice_dec(dice_values[i], i+1) for i in range(len(dice_values))]
     word_value = int(sum(word_decimals) * 4**7)
