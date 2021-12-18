@@ -1,17 +1,19 @@
 import React from 'react'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import { makeStyles } from '@mui/styles';
 
-var cardStyle = {
+
+const cardStyle = {
   display: 'block',
-  width: 100,
-  height: 100
+  maxWidth: 100
 }
 
 function RandomNumberTile(props) {
-  const {number} = props
+  const {number} = props;
+
   return (
-    <Card style={cardStyle} >
+    <Card style={cardStyle}>
       <CardContent>
         <h2>{number}</h2>
       </CardContent>
