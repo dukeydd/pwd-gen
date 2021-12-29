@@ -4,6 +4,19 @@ import { useState, useEffect } from 'react';
 import axios from "axios"
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { createTheme } from '@material-ui/core/styles';
+
+
+const buttonTheme = createTheme({      
+  typography: {
+    button: {
+      textTransform: 'none'
+    }
+  }
+});
+
 
 const useStyles = makeStyles({
   wordItem: {
@@ -24,12 +37,13 @@ function getSevenRandomInt(max=4) {
 
 function App() {
   const [numbers, setNumbers] = useState({});
-  const [words, setWords] = useState({});
+  const [words, setWords]     = useState({});
+  const [passwd, setPasswd]   = useState('');
   const classes = useStyles();
 
   useEffect(() => {
     setNumbers({one: getSevenRandomInt(), two: getSevenRandomInt(), three: getSevenRandomInt()})
-  }, [])
+  }, []);
 
   useEffect(() => {
     for (const key of Object.keys(numbers)) {
@@ -46,6 +60,10 @@ function App() {
       }
     }
   }, [numbers]);
+
+  useEffect(() => {
+    setPasswd(words.one + words.two + words.three);
+  }, [words]);
   
   return (
     <div className="App">
@@ -68,6 +86,15 @@ function App() {
         </Grid>
         <Grid item xs={12} className={classes.wordItem}>
           { words.three }
+        </Grid>
+        <Grid item xs={12}>
+        <Button 
+          variant="outlined" 
+          theme={buttonTheme} 
+          endIcon={<ContentCopyIcon />}
+          onClick={() => {navigator.clipboard.writeText(passwd)}}>
+          { passwd }
+        </Button>
         </Grid>
       </Grid>
     </div>
