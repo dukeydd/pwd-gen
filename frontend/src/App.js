@@ -4,18 +4,8 @@ import { useState, useEffect } from 'react';
 import axios from "axios"
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
-import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import { createTheme } from '@material-ui/core/styles';
-
-
-const buttonTheme = createTheme({      
-  typography: {
-    button: {
-      textTransform: 'none'
-    }
-  }
-});
 
 
 const useStyles = makeStyles({
@@ -88,13 +78,10 @@ function App() {
           { words.three }
         </Grid>
         <Grid item xs={12}>
-        <Button 
-          variant="outlined" 
-          theme={buttonTheme} 
-          endIcon={<ContentCopyIcon />}
-          onClick={() => {navigator.clipboard.writeText(passwd)}}>
-          { passwd }
-        </Button>
+        { passwd }
+        <IconButton color="primary" aria-label="copy" component="span" onClick={() => {navigator.clipboard.writeText(passwd)}}>
+          <ContentCopyIcon />
+        </IconButton>
         </Grid>
       </Grid>
     </div>
