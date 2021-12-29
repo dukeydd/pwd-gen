@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react';
 import axios from "axios"
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+
 
 const useStyles = makeStyles({
   wordItem: {
@@ -68,6 +71,11 @@ function App() {
         </Grid>
         <Grid item xs={12} className={classes.wordItem}>
           { words.three }
+        </Grid>
+        <Grid item xs={12}>
+        <Button variant="outlined" endIcon={<ContentCopyIcon />}>
+          { words.one }{ words.two }{ words.three }
+        </Button>
         </Grid>
       </Grid>
     </div>
