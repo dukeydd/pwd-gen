@@ -36,6 +36,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    setPasswd(''); // stops page reading NaN when loading
     for (const key of Object.keys(numbers)) {
 
       if ( typeof numbers[key] !== 'undefined' && numbers[key] ) {
@@ -52,7 +53,11 @@ function App() {
   }, [numbers]);
 
   useEffect(() => {
-    setPasswd(words.one + words.two + words.three);
+    if ( typeof words.one !== 'undefined' && words.one !== '' &&
+          typeof words.two !== 'undefined' && words.two !== '' &&
+          typeof words.three !== 'undefined' && words.three !== '' ) {
+      setPasswd(words.one + words.two + words.three);
+    }
   }, [words]);
   
   return (
@@ -64,7 +69,8 @@ function App() {
                       aria-label="copy" 
                       component="span" 
                       onClick={() => {
-                        setWords({})
+                        setPasswd('')
+                        setWords({one: '', two: '', three: ''})
                         setNumbers({one: getSevenRandomInt(), two: getSevenRandomInt(), three: getSevenRandomInt()})}}>
             <RefreshIcon />
           </IconButton>
@@ -89,7 +95,8 @@ function App() {
         </Grid>
         <Grid item xs={12}>
         { passwd }
-        <IconButton color="primary" aria-label="copy" component="span" onClick={() => {navigator.clipboard.writeText(passwd)}}>
+        <IconButton color="primary" aria-label="copy" component="span" 
+                    onClick={() => {navigator.clipboard.writeText(passwd)}}>
           <ContentCopyIcon />
         </IconButton>
         </Grid>
