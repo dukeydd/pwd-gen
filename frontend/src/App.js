@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
 import IconButton from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 const useStyles = makeStyles({
   wordItem: {
@@ -59,6 +59,16 @@ function App() {
     <div className="App">
       <h1> Password Generator </h1>
       <Grid container spacing={2} rowSpacing={3}>
+        <Grid item xs={12}>
+          <IconButton color="primary" 
+                      aria-label="copy" 
+                      component="span" 
+                      onClick={() => {
+                        setWords({})
+                        setNumbers({one: getSevenRandomInt(), two: getSevenRandomInt(), three: getSevenRandomInt()})}}>
+            <RefreshIcon />
+          </IconButton>
+        </Grid>
         <Grid item xs={12}>
           <GridTiles numbers={numbers.one}/>
         </Grid>
