@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
 import IconButton from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 const useStyles = makeStyles({
   wordItem: {
@@ -36,6 +36,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    setPasswd(''); // stops page reading NaN when loading
     for (const key of Object.keys(numbers)) {
 
       if ( typeof numbers[key] !== 'undefined' && numbers[key] ) {
@@ -52,13 +53,28 @@ function App() {
   }, [numbers]);
 
   useEffect(() => {
-    setPasswd(words.one + words.two + words.three);
+    if ( typeof words.one !== 'undefined' && words.one !== '' &&
+          typeof words.two !== 'undefined' && words.two !== '' &&
+          typeof words.three !== 'undefined' && words.three !== '' ) {
+      setPasswd(words.one + words.two + words.three);
+    }
   }, [words]);
   
   return (
     <div className="App">
       <h1> Password Generator </h1>
       <Grid container spacing={2} rowSpacing={3}>
+        <Grid item xs={12}>
+          <IconButton color="primary" 
+                      aria-label="copy" 
+                      component="span" 
+                      onClick={() => {
+                        setPasswd('')
+                        setWords({one: '', two: '', three: ''})
+                        setNumbers({one: getSevenRandomInt(), two: getSevenRandomInt(), three: getSevenRandomInt()})}}>
+            <RefreshIcon />
+          </IconButton>
+        </Grid>
         <Grid item xs={12}>
           <GridTiles numbers={numbers.one}/>
         </Grid>
@@ -79,7 +95,8 @@ function App() {
         </Grid>
         <Grid item xs={12}>
         { passwd }
-        <IconButton color="primary" aria-label="copy" component="span" onClick={() => {navigator.clipboard.writeText(passwd)}}>
+        <IconButton color="primary" aria-label="copy" component="span" 
+                    onClick={() => {navigator.clipboard.writeText(passwd)}}>
           <ContentCopyIcon />
         </IconButton>
         </Grid>
