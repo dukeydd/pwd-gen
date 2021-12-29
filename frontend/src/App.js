@@ -6,6 +6,16 @@ import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { createTheme } from '@material-ui/core/styles';
+
+
+const buttonTheme = createTheme({      
+  typography: {
+    button: {
+      textTransform: 'none'
+    }
+  }
+});
 
 
 const useStyles = makeStyles({
@@ -73,7 +83,7 @@ function App() {
           { words.three }
         </Grid>
         <Grid item xs={12}>
-        <Button variant="outlined" endIcon={<ContentCopyIcon />}>
+        <Button variant="outlined" theme={buttonTheme} endIcon={<ContentCopyIcon />}>
           { words.one }{ words.two }{ words.three }
         </Button>
         </Grid>
