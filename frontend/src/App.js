@@ -37,12 +37,13 @@ function getSevenRandomInt(max=4) {
 
 function App() {
   const [numbers, setNumbers] = useState({});
-  const [words, setWords] = useState({});
+  const [words, setWords]     = useState({});
+  const [passwd, setPasswd]   = useState('');
   const classes = useStyles();
 
   useEffect(() => {
     setNumbers({one: getSevenRandomInt(), two: getSevenRandomInt(), three: getSevenRandomInt()})
-  }, [])
+  }, []);
 
   useEffect(() => {
     for (const key of Object.keys(numbers)) {
@@ -59,6 +60,10 @@ function App() {
       }
     }
   }, [numbers]);
+
+  useEffect(() => {
+    setPasswd(words.one + words.two + words.three);
+  }, [words]);
   
   return (
     <div className="App">
@@ -83,8 +88,12 @@ function App() {
           { words.three }
         </Grid>
         <Grid item xs={12}>
-        <Button variant="outlined" theme={buttonTheme} endIcon={<ContentCopyIcon />}>
-          { words.one }{ words.two }{ words.three }
+        <Button 
+          variant="outlined" 
+          theme={buttonTheme} 
+          endIcon={<ContentCopyIcon />}
+          onClick={() => {navigator.clipboard.writeText(passwd)}}>
+          { passwd }
         </Button>
         </Grid>
       </Grid>
