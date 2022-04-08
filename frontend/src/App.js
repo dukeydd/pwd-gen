@@ -1,7 +1,7 @@
 import './App.css';
-import GridTiles from './components/GridTiles'
+import GridTiles from './components/GridTiles';
 import { useState, useEffect } from 'react';
-import axios from "axios"
+import axios from "axios";
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
 import IconButton from '@mui/material/IconButton';

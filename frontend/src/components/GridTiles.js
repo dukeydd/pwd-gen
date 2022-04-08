@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import Grid from '@mui/material/Grid';
-import NumberTile from './NumberTile'
+import NumberTile from './NumberTile';
 
 function GridTiles(props) {
   const {numbers} = props
