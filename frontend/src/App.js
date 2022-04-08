@@ -14,6 +14,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import TextField from '@mui/material/TextField';
 //end
 
 const useStyles = makeStyles({
@@ -37,6 +38,7 @@ function App() {
   const [numbers, setNumbers] = useState({});
   const [words, setWords]     = useState({});
   const [passwd, setPasswd]   = useState('');
+  const [delim, setDelim]     = useState('');
   const classes = useStyles();
 
   useEffect(() => {
@@ -64,10 +66,12 @@ function App() {
     if ( typeof words.one !== 'undefined' && words.one !== '' &&
           typeof words.two !== 'undefined' && words.two !== '' &&
           typeof words.three !== 'undefined' && words.three !== '' ) {
-      setPasswd(words.one + words.two + words.three);
+      setPasswd(words.one + delim + words.two + delim + words.three);
     }
-  }, [words]);
+  }, [words, delim]);
 
+  // add useEffect for delim
+  
   const handleCase = (event) => {
 
     let wordone = words.one
@@ -91,9 +95,15 @@ function App() {
         wordthree = words.three.charAt(0).toUpperCase() + words.three.slice(1);
         break;
     }
-    setPasswd(wordone+wordtwo+wordthree)
+    setWords({one: wordone, two: wordtwo, three: wordthree})
+    setPasswd(wordone+delim+wordtwo+delim+wordthree)
   };
 
+  const handleDelim = (event) => {
+    const delimiter = event.target.value
+    setDelim(delimiter)
+    setPasswd(words.one+delimiter+words.two+delimiter+words.three)
+  }
   
   return (
     <div className="App">
@@ -141,20 +151,36 @@ function App() {
       <div>
         <h2>Additional Options </h2>
         
-        <FormControl>
-          <FormLabel id="case-options-label">Case Options</FormLabel>
-          <RadioGroup
-            aria-labelledby="case-options-label"
-            defaultValue="snake"
-            name="case-options-group"
-            onChange={handleCase}
-          >
-            <FormControlLabel value="snake" control={<Radio />} label="Snake" />
-            <FormControlLabel value="pascal" control={<Radio />} label="Pascal" />
-            <FormControlLabel value="camel" control={<Radio />} label="Camel" />
-            
-          </RadioGroup>
-        </FormControl>
+        <Grid 
+          container spacing={2}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Grid item xs={3}>
+              <FormControl>
+                <FormLabel id="case-options-label">Case Options</FormLabel>
+                <RadioGroup
+                  aria-labelledby="case-options-label"
+                  defaultValue="snake"
+                  name="case-options-group"
+                  onChange={handleCase}
+                >
+                  <FormControlLabel value="snake" control={<Radio />} label="Snake" />
+                  <FormControlLabel value="pascal" control={<Radio />} label="Pascal" />
+                  <FormControlLabel value="camel" control={<Radio />} label="Camel" />
+                  
+                </RadioGroup>
+              </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+              <TextField 
+                id="word-delimiter-input" 
+                label="Word Delimiter" 
+                variant="outlined" 
+                onChange={handleDelim}/>
+          </Grid>
+        </Grid>
+        
       </div>
 
 
