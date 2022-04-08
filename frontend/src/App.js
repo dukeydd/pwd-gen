@@ -67,6 +67,33 @@ function App() {
       setPasswd(words.one + words.two + words.three);
     }
   }, [words]);
+
+  const handleCase = (event) => {
+
+    let wordone = words.one
+    let wordtwo = words.two
+    let wordthree = words.three
+
+    switch(event.target.value) {
+      case "snake":
+        wordone = words.one.charAt(0).toLowerCase() + words.one.slice(1);
+        wordtwo = words.two.charAt(0).toLowerCase() + words.two.slice(1);
+        wordthree = words.three.charAt(0).toLowerCase() + words.three.slice(1);
+        break;
+      case "pascal":
+        wordone = words.one.charAt(0).toUpperCase() + words.one.slice(1);
+        wordtwo = words.two.charAt(0).toUpperCase() + words.two.slice(1);
+        wordthree = words.three.charAt(0).toUpperCase() + words.three.slice(1);
+        break;
+      case "camel":
+        wordone = words.one.charAt(0).toLowerCase() + words.one.slice(1);
+        wordtwo = words.two.charAt(0).toUpperCase() + words.two.slice(1);
+        wordthree = words.three.charAt(0).toUpperCase() + words.three.slice(1);
+        break;
+    }
+    setPasswd(wordone+wordtwo+wordthree)
+  };
+
   
   return (
     <div className="App">
@@ -118,12 +145,14 @@ function App() {
           <FormLabel id="case-options-label">Case Options</FormLabel>
           <RadioGroup
             aria-labelledby="case-options-label"
-            defaultValue="Pascal"
+            defaultValue="snake"
             name="case-options-group"
+            onChange={handleCase}
           >
+            <FormControlLabel value="snake" control={<Radio />} label="Snake" />
             <FormControlLabel value="pascal" control={<Radio />} label="Pascal" />
-            <FormControlLabel value="camel" control={<Radio />} label="camel" />
-            <FormControlLabel value="snake" control={<Radio />} label="snake" />
+            <FormControlLabel value="camel" control={<Radio />} label="Camel" />
+            
           </RadioGroup>
         </FormControl>
       </div>
