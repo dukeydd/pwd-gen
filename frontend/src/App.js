@@ -39,6 +39,7 @@ function App() {
   const [words, setWords]     = useState({});
   const [passwd, setPasswd]   = useState('');
   const [delim, setDelim]     = useState('');
+  const [suffix, setSuffix]   = useState('');
   const classes = useStyles();
 
   useEffect(() => {
@@ -66,9 +67,9 @@ function App() {
     if ( typeof words.one !== 'undefined' && words.one !== '' &&
           typeof words.two !== 'undefined' && words.two !== '' &&
           typeof words.three !== 'undefined' && words.three !== '' ) {
-      setPasswd(words.one + delim + words.two + delim + words.three);
+      setPasswd(words.one + delim + words.two + delim + words.three + suffix);
     }
-  }, [words, delim]);
+  }, [words, delim, suffix]);
 
   // add useEffect for delim
   
@@ -101,6 +102,11 @@ function App() {
   const handleDelim = (event) => {
     const delimiter = event.target.value
     setDelim(delimiter)
+  };
+
+  const handleSuffix = (event) => {
+    const suff = event.target.value
+    setSuffix(suff)
   }
   
   return (
@@ -154,7 +160,7 @@ function App() {
           alignItems="center"
           justifyContent="center"
         >
-          <Grid item xs={3}>
+          <Grid item xs={6}>
               <FormControl>
                 <FormLabel id="case-options-label">Case Options</FormLabel>
                 <RadioGroup
@@ -170,12 +176,20 @@ function App() {
                 </RadioGroup>
               </FormControl>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={6}>
               <TextField 
                 id="word-delimiter-input" 
                 label="Word Delimiter" 
                 variant="outlined" 
                 onChange={handleDelim}/>
+          </Grid>
+          <Grid item xs={6}/>
+ 
+          <Grid item xs={6}><TextField 
+                id="password-suffix-input" 
+                label="Password Suffix" 
+                variant="outlined"
+                onChange={handleSuffix}/>
           </Grid>
         </Grid>
         
