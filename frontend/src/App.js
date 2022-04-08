@@ -96,13 +96,11 @@ function App() {
         break;
     }
     setWords({one: wordone, two: wordtwo, three: wordthree})
-    setPasswd(wordone+delim+wordtwo+delim+wordthree)
   };
 
   const handleDelim = (event) => {
     const delimiter = event.target.value
     setDelim(delimiter)
-    setPasswd(words.one+delimiter+words.two+delimiter+words.three)
   }
   
   return (
