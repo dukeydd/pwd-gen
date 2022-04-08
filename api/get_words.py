@@ -19,8 +19,7 @@ def get_dict(filename='dictionary.txt'):
     data = []
     with open(filename, 'r') as dictionary:
         for word in dictionary:
-            data.append(word.strip('\n').title())
-    
+            data.append(word.strip('\n'))
     return data
 
 

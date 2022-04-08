@@ -1,12 +1,20 @@
 import './App.css';
-import GridTiles from './components/GridTiles'
+import GridTiles from './components/GridTiles';
 import { useState, useEffect } from 'react';
-import axios from "axios"
+import axios from "axios";
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
 import IconButton from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RefreshIcon from '@mui/icons-material/Refresh';
+
+// for AdditionalOptions
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+//end
 
 const useStyles = makeStyles({
   wordItem: {
@@ -59,6 +67,33 @@ function App() {
       setPasswd(words.one + words.two + words.three);
     }
   }, [words]);
+
+  const handleCase = (event) => {
+
+    let wordone = words.one
+    let wordtwo = words.two
+    let wordthree = words.three
+
+    switch(event.target.value) {
+      case "snake":
+        wordone = words.one.charAt(0).toLowerCase() + words.one.slice(1);
+        wordtwo = words.two.charAt(0).toLowerCase() + words.two.slice(1);
+        wordthree = words.three.charAt(0).toLowerCase() + words.three.slice(1);
+        break;
+      case "pascal":
+        wordone = words.one.charAt(0).toUpperCase() + words.one.slice(1);
+        wordtwo = words.two.charAt(0).toUpperCase() + words.two.slice(1);
+        wordthree = words.three.charAt(0).toUpperCase() + words.three.slice(1);
+        break;
+      case "camel":
+        wordone = words.one.charAt(0).toLowerCase() + words.one.slice(1);
+        wordtwo = words.two.charAt(0).toUpperCase() + words.two.slice(1);
+        wordthree = words.three.charAt(0).toUpperCase() + words.three.slice(1);
+        break;
+    }
+    setPasswd(wordone+wordtwo+wordthree)
+  };
+
   
   return (
     <div className="App">
@@ -101,6 +136,28 @@ function App() {
         </IconButton>
         </Grid>
       </Grid>
+      
+      
+      <div>
+        <h2>Additional Options </h2>
+        
+        <FormControl>
+          <FormLabel id="case-options-label">Case Options</FormLabel>
+          <RadioGroup
+            aria-labelledby="case-options-label"
+            defaultValue="snake"
+            name="case-options-group"
+            onChange={handleCase}
+          >
+            <FormControlLabel value="snake" control={<Radio />} label="Snake" />
+            <FormControlLabel value="pascal" control={<Radio />} label="Pascal" />
+            <FormControlLabel value="camel" control={<Radio />} label="Camel" />
+            
+          </RadioGroup>
+        </FormControl>
+      </div>
+
+
     </div>
   );
 }
