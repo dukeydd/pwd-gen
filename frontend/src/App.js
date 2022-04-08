@@ -8,6 +8,14 @@ import IconButton from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
+// for AdditionalOptions
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+//end
+
 const useStyles = makeStyles({
   wordItem: {
     height: 20,
@@ -101,6 +109,26 @@ function App() {
         </IconButton>
         </Grid>
       </Grid>
+      
+      
+      <div>
+        <h2>Additional Options </h2>
+        
+        <FormControl>
+          <FormLabel id="case-options-label">Case Options</FormLabel>
+          <RadioGroup
+            aria-labelledby="case-options-label"
+            defaultValue="Pascal"
+            name="case-options-group"
+          >
+            <FormControlLabel value="pascal" control={<Radio />} label="Pascal" />
+            <FormControlLabel value="camel" control={<Radio />} label="camel" />
+            <FormControlLabel value="snake" control={<Radio />} label="snake" />
+          </RadioGroup>
+        </FormControl>
+      </div>
+
+
     </div>
   );
 }
