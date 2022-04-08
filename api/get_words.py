@@ -2,13 +2,14 @@ import requests
 from io import BytesIO
 import zipfile 
 import os
-
+from time import sleep
 
 def update_dictionary():
     url = "http://www.gwicks.net/textlists/usa.zip"
     resp = requests.get(url, stream=True).content
     zf = zipfile.ZipFile(BytesIO(resp))
     zf.extractall()
+    sleep(1)
     os.rename('usa.txt', 'dictionary.txt')
 
 

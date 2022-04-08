@@ -3,7 +3,7 @@ from fastapi import FastAPI, Query
 import get_words
 from random import randint
 from fastapi.middleware.cors import CORSMiddleware
-
+from os.path import exists
 
 app = FastAPI()
 
@@ -52,4 +52,8 @@ def get_word(dice_values):
 
 
 if __name__ == "__main__":
+    if not exists("dictionary.txt"):
+        print('Dictionary not found, updating')
+        get_words.update_dictionary()
+
     uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
