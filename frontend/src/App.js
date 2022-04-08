@@ -15,6 +15,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 //end
 
 const useStyles = makeStyles({
@@ -108,6 +110,10 @@ function App() {
     const suff = event.target.value
     setSuffix(suff)
   }
+
+  const handleQuickSuffix = (event) => {
+    setSuffix(event.target.value)
+  }
   
   return (
     <div className="App">
@@ -183,13 +189,23 @@ function App() {
                 variant="outlined" 
                 onChange={handleDelim}/>
           </Grid>
-          <Grid item xs={6}/>
  
-          <Grid item xs={6}><TextField 
-                id="password-suffix-input" 
-                label="Password Suffix" 
-                variant="outlined"
-                onChange={handleSuffix}/>
+          <Grid item xs={6}>
+            <TextField 
+              id="password-suffix-input" 
+              label="Password Suffix" 
+              variant="outlined"
+              onChange={handleSuffix}/>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Stack spacing={2} direction="column">
+              Quick Suffix Options <p></p>
+              <Button variant="outlined" onClick={handleQuickSuffix} value= "?">?</Button>
+              <Button variant="outlined" onClick={handleQuickSuffix} value="$">$</Button>
+              <Button variant="outlined" onClick={handleQuickSuffix} value=".">.</Button>
+              <Button variant="outlined" onClick={handleQuickSuffix} value="$%./">$%./</Button>
+            </Stack>
           </Grid>
         </Grid>
         
