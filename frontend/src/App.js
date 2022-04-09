@@ -101,16 +101,6 @@ function App() {
     setWords({one: wordone, two: wordtwo, three: wordthree})
   };
 
-  const handleDelim = (event) => {
-    const delimiter = event.target.value
-    setDelim(delimiter)
-  };
-
-  const handleSuffix = (event) => {
-    const suff = event.target.value
-    setSuffix(suff)
-  }
-
   const handleQuickSuffix = (event) => {
     setSuffix(event.target.value)
   }
@@ -163,10 +153,10 @@ function App() {
         
         <Grid 
           container spacing={2}
-          alignItems="center"
+          // alignItems="center"
           justifyContent="center"
         >
-          <Grid item xs={6}>
+          <Grid item xs={4}>
               <FormControl>
                 <FormLabel id="case-options-label">Case Options</FormLabel>
                 <RadioGroup
@@ -182,25 +172,29 @@ function App() {
                 </RadioGroup>
               </FormControl>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
+            <Stack spacing={2} direction="column">
+            <FormLabel id="custom-options-label">Custom Options</FormLabel>
               <TextField 
                 id="word-delimiter-input" 
                 label="Word Delimiter" 
                 variant="outlined" 
-                onChange={handleDelim}/>
-          </Grid>
- 
-          <Grid item xs={6}>
-            <TextField 
-              id="password-suffix-input" 
-              label="Password Suffix" 
-              variant="outlined"
-              onChange={handleSuffix}/>
+                onChange={(event) => {
+                  setDelim(event.target.value)
+                }}/>
+              <TextField 
+                id="password-suffix-input" 
+                label="Password Suffix" 
+                variant="outlined"
+                onChange={(event) => {
+                  setSuffix(event.target.value)
+                }}/>
+            </Stack>
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item xs={4}>
             <Stack spacing={2} direction="column">
-              Quick Suffix Options <p></p>
+            <FormLabel id="suffix-options-label">Quick Suffix Options</FormLabel>
               <Button variant="outlined" onClick={handleQuickSuffix} value= "?">?</Button>
               <Button variant="outlined" onClick={handleQuickSuffix} value="$">$</Button>
               <Button variant="outlined" onClick={handleQuickSuffix} value=".">.</Button>
