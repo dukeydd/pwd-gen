@@ -24,6 +24,10 @@ const useStyles = makeStyles({
     height: 20,
     paddingTop: 20,
     paddingBottom: 20
+  },
+  centreStuff: {
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 });
 
@@ -73,7 +77,6 @@ function App() {
     }
   }, [words, delim, suffix]);
 
-  // add useEffect for delim
   
   const handleCase = (event) => {
 
@@ -192,13 +195,13 @@ function App() {
             </Stack>
           </Grid>
 
-          <Grid item xs={4}>
-            <Stack spacing={2} direction="column">
+          <Grid item xs={4} >
+            <Stack spacing={2} direction="column" className={classes.centreStuff}>
             <FormLabel id="suffix-options-label">Quick Suffix Options</FormLabel>
-              <Button variant="outlined" onClick={handleQuickSuffix} value= "?">?</Button>
-              <Button variant="outlined" onClick={handleQuickSuffix} value="$">$</Button>
-              <Button variant="outlined" onClick={handleQuickSuffix} value=".">.</Button>
-              <Button variant="outlined" onClick={handleQuickSuffix} value="$%./">$%./</Button>
+              <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value= "?">?</Button>
+              <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value="$">$</Button>
+              <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value=".">.</Button>
+              <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value="$%./">$%./</Button>
             </Stack>
           </Grid>
         </Grid>
