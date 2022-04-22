@@ -5,19 +5,9 @@ import axios from "axios";
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
 import IconButton from '@mui/material/IconButton';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import AdditionalOptions from './components/AdditionalOptions';
 
-// for AdditionalOptions
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-//end
 
 const useStyles = makeStyles({
   wordItem: {
@@ -39,9 +29,6 @@ function getSevenRandomInt(max=4) {
 function App() {
   const [numbers, setNumbers] = useState({});
   const [words, setWords]     = useState({});
-  const [passwd, setPasswd]   = useState('');
-  const [delim, setDelim]     = useState('');
-  const [suffix, setSuffix]   = useState('');
   const classes = useStyles();
 
   useEffect(() => {
@@ -49,7 +36,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    setPasswd(''); // stops page reading NaN when loading
     for (const key of Object.keys(numbers)) {
 
       if ( typeof numbers[key] !== 'undefined' && numbers[key] ) {
@@ -64,56 +50,6 @@ function App() {
       }
     }
   }, [numbers]);
-
-  useEffect(() => {
-    if ( typeof words.one !== 'undefined' && words.one !== '' &&
-          typeof words.two !== 'undefined' && words.two !== '' &&
-          typeof words.three !== 'undefined' && words.three !== '' ) {
-      setPasswd(words.one + delim + words.two + delim + words.three + suffix);
-    }
-  }, [words, delim, suffix]);
-
-  // add useEffect for delim
-  
-  const handleCase = (event) => {
-
-    let wordone = words.one
-    let wordtwo = words.two
-    let wordthree = words.three
-
-    switch(event.target.value) {
-      case "snake":
-        wordone = words.one.charAt(0).toLowerCase() + words.one.slice(1);
-        wordtwo = words.two.charAt(0).toLowerCase() + words.two.slice(1);
-        wordthree = words.three.charAt(0).toLowerCase() + words.three.slice(1);
-        break;
-      case "pascal":
-        wordone = words.one.charAt(0).toUpperCase() + words.one.slice(1);
-        wordtwo = words.two.charAt(0).toUpperCase() + words.two.slice(1);
-        wordthree = words.three.charAt(0).toUpperCase() + words.three.slice(1);
-        break;
-      case "camel":
-        wordone = words.one.charAt(0).toLowerCase() + words.one.slice(1);
-        wordtwo = words.two.charAt(0).toUpperCase() + words.two.slice(1);
-        wordthree = words.three.charAt(0).toUpperCase() + words.three.slice(1);
-        break;
-    }
-    setWords({one: wordone, two: wordtwo, three: wordthree})
-  };
-
-  const handleDelim = (event) => {
-    const delimiter = event.target.value
-    setDelim(delimiter)
-  };
-
-  const handleSuffix = (event) => {
-    const suff = event.target.value
-    setSuffix(suff)
-  }
-
-  const handleQuickSuffix = (event) => {
-    setSuffix(event.target.value)
-  }
   
   return (
     <div className="App">
@@ -124,7 +60,6 @@ function App() {
                       aria-label="copy" 
                       component="span" 
                       onClick={() => {
-                        setPasswd('')
                         setWords({one: '', two: '', three: ''})
                         setNumbers({one: getSevenRandomInt(), two: getSevenRandomInt(), three: getSevenRandomInt()})}}>
             <RefreshIcon />
@@ -148,69 +83,9 @@ function App() {
         <Grid item xs={12} className={classes.wordItem}>
           { words.three }
         </Grid>
-        <Grid item xs={12}>
-        { passwd }
-        <IconButton color="primary" aria-label="copy" component="span" 
-                    onClick={() => {navigator.clipboard.writeText(passwd)}}>
-          <ContentCopyIcon />
-        </IconButton>
-        </Grid>
       </Grid>
       
-      
-      <div>
-        <h2>Additional Options </h2>
-        
-        <Grid 
-          container spacing={2}
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Grid item xs={6}>
-              <FormControl>
-                <FormLabel id="case-options-label">Case Options</FormLabel>
-                <RadioGroup
-                  aria-labelledby="case-options-label"
-                  defaultValue="snake"
-                  name="case-options-group"
-                  onChange={handleCase}
-                >
-                  <FormControlLabel value="snake" control={<Radio />} label="Snake" />
-                  <FormControlLabel value="pascal" control={<Radio />} label="Pascal" />
-                  <FormControlLabel value="camel" control={<Radio />} label="Camel" />
-                  
-                </RadioGroup>
-              </FormControl>
-          </Grid>
-          <Grid item xs={6}>
-              <TextField 
-                id="word-delimiter-input" 
-                label="Word Delimiter" 
-                variant="outlined" 
-                onChange={handleDelim}/>
-          </Grid>
- 
-          <Grid item xs={6}>
-            <TextField 
-              id="password-suffix-input" 
-              label="Password Suffix" 
-              variant="outlined"
-              onChange={handleSuffix}/>
-          </Grid>
-
-          <Grid item xs={2}>
-            <Stack spacing={2} direction="column">
-              Quick Suffix Options <p></p>
-              <Button variant="outlined" onClick={handleQuickSuffix} value= "?">?</Button>
-              <Button variant="outlined" onClick={handleQuickSuffix} value="$">$</Button>
-              <Button variant="outlined" onClick={handleQuickSuffix} value=".">.</Button>
-              <Button variant="outlined" onClick={handleQuickSuffix} value="$%./">$%./</Button>
-            </Stack>
-          </Grid>
-        </Grid>
-        
-      </div>
-
+      <AdditionalOptions words={words} setWords={setWords} />
 
     </div>
   );
