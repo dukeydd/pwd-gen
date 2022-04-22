@@ -7,23 +7,14 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import { makeStyles } from '@mui/styles';
+import QuickSuffix from './QuickSuffix';
 
-
-const useStyles = makeStyles({
-  centreStuff: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-});
 
 function AdditionalOptions(props) {
   const [delim, setDelim]     = useState('');
   const [suffix, setSuffix]   = useState('');
   const [passwd, setPasswd]   = useState('');
-  const classes = useStyles();
 
   const words = props.words;
   const setWords = props.setWords;
@@ -62,10 +53,6 @@ function AdditionalOptions(props) {
     }
     setWords({one: wordone, two: wordtwo, three: wordthree})
   };
-
-  const handleQuickSuffix = (event) => {
-    setSuffix(event.target.value)
-  }
   
   return (
     <div>
@@ -111,13 +98,7 @@ function AdditionalOptions(props) {
         </Grid>
 
         <Grid item xs={4} >
-          <Stack spacing={2} direction="column" className={classes.centreStuff}>
-          <FormLabel id="suffix-options-label">Quick Suffix Options</FormLabel>
-            <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value= "?">?</Button>
-            <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value="$">$</Button>
-            <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value=".">.</Button>
-            <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value="$%./">$%./</Button>
-          </Stack>
+          <QuickSuffix setSuffix={setSuffix}/>
         </Grid>
       </Grid>
       {passwd}
