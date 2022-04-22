@@ -101,7 +101,7 @@ function AdditionalOptions(props) {
           <QuickSuffix setSuffix={setSuffix}/>
         </Grid>
       </Grid>
-      {passwd}
+      <h2>{passwd}</h2>
     </div>
   );
 }
