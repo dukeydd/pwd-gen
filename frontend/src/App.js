@@ -5,7 +5,6 @@ import axios from "axios";
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
 import IconButton from '@mui/material/IconButton';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import AdditionalOptions from './components/AdditionalOptions';
 
@@ -15,10 +14,6 @@ const useStyles = makeStyles({
     height: 20,
     paddingTop: 20,
     paddingBottom: 20
-  },
-  centreStuff: {
-    justifyContent: 'center',
-    alignItems: 'center',
   }
 });
 
@@ -41,7 +36,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // setPasswd(''); // stops page reading NaN when loading
     for (const key of Object.keys(numbers)) {
 
       if ( typeof numbers[key] !== 'undefined' && numbers[key] ) {
@@ -66,7 +60,6 @@ function App() {
                       aria-label="copy" 
                       component="span" 
                       onClick={() => {
-                        // setPasswd('')
                         setWords({one: '', two: '', three: ''})
                         setNumbers({one: getSevenRandomInt(), two: getSevenRandomInt(), three: getSevenRandomInt()})}}>
             <RefreshIcon />
@@ -90,76 +83,9 @@ function App() {
         <Grid item xs={12} className={classes.wordItem}>
           { words.three }
         </Grid>
-        {/* <Grid item xs={12}>
-        { passwd }
-        <IconButton color="primary" aria-label="copy" component="span" 
-                    onClick={() => {navigator.clipboard.writeText(passwd)}}>
-          <ContentCopyIcon />
-        </IconButton>
-        </Grid> */}
       </Grid>
       
-      <AdditionalOptions 
-      // wordOne={words.one} wordTwo={words.two} wordThree={words.three} 
-                          words={words} setWords={setWords} />
-      
-      {/* <div> */}
-        {/* <h2>Additional Options </h2>
-        
-        <Grid 
-          container spacing={2}
-          // alignItems="center"
-          justifyContent="center"
-        >
-          <Grid item xs={4}>
-              <FormControl>
-                <FormLabel id="case-options-label">Case Options</FormLabel>
-                <RadioGroup
-                  aria-labelledby="case-options-label"
-                  defaultValue="snake"
-                  name="case-options-group"
-                  onChange={handleCase}
-                >
-                  <FormControlLabel value="snake" control={<Radio />} label="Snake" />
-                  <FormControlLabel value="pascal" control={<Radio />} label="Pascal" />
-                  <FormControlLabel value="camel" control={<Radio />} label="Camel" />
-                  
-                </RadioGroup>
-              </FormControl>
-          </Grid>
-          <Grid item xs={4}>
-            <Stack spacing={2} direction="column">
-            <FormLabel id="custom-options-label">Custom Options</FormLabel>
-              <TextField 
-                id="word-delimiter-input" 
-                label="Word Delimiter" 
-                variant="outlined" 
-                onChange={(event) => {
-                  setDelim(event.target.value)
-                }}/>
-              <TextField 
-                id="password-suffix-input" 
-                label="Password Suffix" 
-                variant="outlined"
-                onChange={(event) => {
-                  setSuffix(event.target.value)
-                }}/>
-            </Stack>
-          </Grid>
-
-          <Grid item xs={4} >
-            <Stack spacing={2} direction="column" className={classes.centreStuff}>
-            <FormLabel id="suffix-options-label">Quick Suffix Options</FormLabel>
-              <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value= "?">?</Button>
-              <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value="$">$</Button>
-              <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value=".">.</Button>
-              <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value="$%./">$%./</Button>
-            </Stack>
-          </Grid>
-        </Grid> */}
-        
-      {/* </div> */}
-
+      <AdditionalOptions words={words} setWords={setWords} />
 
     </div>
   );

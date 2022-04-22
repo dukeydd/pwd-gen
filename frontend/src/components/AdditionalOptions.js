@@ -13,11 +13,6 @@ import { makeStyles } from '@mui/styles';
 
 
 const useStyles = makeStyles({
-  wordItem: {
-    height: 20,
-    paddingTop: 20,
-    paddingBottom: 20
-  },
   centreStuff: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -77,7 +72,6 @@ function AdditionalOptions(props) {
       <h2>Additional Options </h2>
       <Grid 
         container spacing={2}
-        // alignItems="center"
         justifyContent="center"
       >
         <Grid item xs={4}>
