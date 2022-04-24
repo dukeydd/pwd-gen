@@ -24,9 +24,9 @@ function QuickSuffix(props) {
   <Stack spacing={2} direction="column" className={classes.centreStuff}>
     <FormLabel id="suffix-options-label">Quick Suffix Options</FormLabel>
     <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value= "?">?</Button>
-    <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value="$">$</Button>
+    <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value="1">1</Button>
     <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value=".">.</Button>
-    <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value="$%./">$%./</Button>
+    <Button variant="outlined" style={{maxWidth: '80px', maxHeight: '30px', minWidth: '80px', minHeight: '30px'}} onClick={handleQuickSuffix} value="1%./">1%./</Button>
   </Stack>
 )};
 
